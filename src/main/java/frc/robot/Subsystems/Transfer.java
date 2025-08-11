@@ -18,7 +18,7 @@ private final TalonFX transferMotor;
 private final DigitalInput beamBreakSensor1;
 private final DigitalInput beamBreakSensor2;
     public Transfer() {
-        transferMotor = new TalonFX(5); 
+        transferMotor = new TalonFX(8); 
         beamBreakSensor1 = new DigitalInput(1);
         beamBreakSensor2 = new DigitalInput(2);
     }

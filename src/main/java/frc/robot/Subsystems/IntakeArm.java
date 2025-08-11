@@ -26,7 +26,7 @@ public class IntakeArm extends SubsystemBase {
         intakeArmMConfiguration.Slot0.kD = 0.0;
      
         gearRatioConfigs.SensorToMechanismRatio = 28.0;
-        
+        intakeArmMConfiguration.Feedback = gearRatioConfigs;
         intakeArmMotor.getConfigurator().apply(intakeArmMConfiguration);
     }
 

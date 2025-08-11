@@ -25,6 +25,6 @@ private final DigitalInput beamBreakSensor;
         intakeRollersMotor.setVoltage(0);
     }
     public boolean isBallDetected() {
-        return beamBreakSensor.get(); 
+        return !beamBreakSensor.get(); 
     }
 }

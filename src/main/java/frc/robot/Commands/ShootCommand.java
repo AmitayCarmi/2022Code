@@ -35,12 +35,17 @@ private final Transfer transfer;
    
     if (transfer.getBallCount() > 0) {
       shooter.setVoltage(11);
-      waituntill (shooter.getAverageRPM() >= 5000);
-       while (transfer.getBallCount() > 0) {
-        transfer.setVoltage(6);
-       }
+
+      if (shooter.getAverageRPM() >= 5000) {
+        transfer.setVoltage(6 );
+      } else {
+        transfer.stopTransfer();
+      }
+    } else { 
+      shooter.stopShooter();
+      transfer.stopTransfer();}
     }
-        }
+        
       
        
       
@@ -48,7 +53,7 @@ private final Transfer transfer;
         @Override
   public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
+ 
   @Override
   public boolean isFinished() {
     return false;
@@ -57,10 +62,9 @@ private final Transfer transfer;
    
     throw new UnsupportedOperationException("Unimplemented method 'addRequirements'");
   }
-  private void waituntill(boolean b) {
+  
    
-    throw new UnsupportedOperationException("Unimplemented method 'waituntill'");
-  }
+   
 
 }
   
