@@ -14,10 +14,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
     private static DriveTrain driveTrain;
+
     private final TalonFX leftDriveMotor;
     private final TalonFX rightDriveMotor;
-    private final TalonFXConfiguration rightDriveMotorConfig;
+
     private final TalonFXConfiguration leftDriveMotorConfig;
+    private final TalonFXConfiguration rightDriveMotorConfig;
 
     public DriveTrain() {
         rightDriveMotorConfig = new TalonFXConfiguration();

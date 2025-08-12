@@ -3,7 +3,7 @@ package frc.robot.Subsystems;
 
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.controls.PositionDutyCycle;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import static frc.robot.Subsystems.Constants.INTAKE_ARM_GEAR_RATIO;
@@ -20,7 +20,7 @@ public class IntakeArm extends SubsystemBase {
     private static IntakeArm intakeArm;
     private final TalonFX intakeArmMotor;
     private final TalonFXConfiguration intakeArmMConfiguration;
-    private final PositionDutyCycle posControl = new PositionDutyCycle(0);
+  private final PositionVoltage posControl = new PositionVoltage(0).withSlot(0);
 
     public IntakeArm() {
         intakeArmMConfiguration = new TalonFXConfiguration();

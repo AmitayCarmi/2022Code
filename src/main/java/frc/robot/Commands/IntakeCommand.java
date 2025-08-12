@@ -11,7 +11,6 @@ import frc.robot.Subsystems.IntakeRollers;
 import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Transfer;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class IntakeCommand extends Command {
   private final IntakeArm arm;
   private final IntakeRollers rollers;
@@ -39,19 +38,24 @@ public class IntakeCommand extends Command {
       arm.lower();
       rollers.setVoltage(6);
       transfer.setVoltage(6);
-      ;
-    } else {
-      arm.raise();
-      rollers.stopRollers();
-      transfer.stopTransfer();
-      shooter.setVoltage(10);
     }
+  }
 
+  @Override
+  public void end(boolean interrupted) {
+    arm.raise();
+    rollers.stopRollers();
+    transfer.stopTransfer();
+    shooter.setVoltage(10);
+  }
+
+  @Override
+  public boolean isFinished() {
+    return transfer.getBallCount() >= 2;
   }
 
   private void addRequirements(IntakeArm arm2, IntakeRollers rollers2, Shooter shooter2, Transfer transfer2) {
 
     throw new UnsupportedOperationException("Unimplemented method 'addRequirements'");
   }
-
 }
