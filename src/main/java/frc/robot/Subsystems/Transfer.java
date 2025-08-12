@@ -4,41 +4,56 @@
 
 package frc.robot.Subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
+import static frc.robot.Subsystems.Constants.TRANSFER_BACK_BEAM_BREAK_SENSOR_ID;
+import static frc.robot.Subsystems.Constants.TRANSFER_FRONT_BEAM_BREAK_SENSOR_ID;
+import static frc.robot.Subsystems.Constants.TRANSFER_MOTOR_ID;
 
+import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+public class Transfer extends SubsystemBase {
 
-public class Transfer extends SubsystemBase{
+    private final TalonFX transferMotor;
+    private static Transfer transfer;
+    private final DigitalInput beamBreakSensorFront;
+    private final DigitalInput beamBreakSensorBack;
 
-private final TalonFX transferMotor;
-
-private final DigitalInput beamBreakSensor1;
-private final DigitalInput beamBreakSensor2;
     public Transfer() {
-        transferMotor = new TalonFX(8); 
-        beamBreakSensor1 = new DigitalInput(1);
-        beamBreakSensor2 = new DigitalInput(2);
+        transferMotor = new TalonFX(TRANSFER_MOTOR_ID);
+        beamBreakSensorFront = new DigitalInput(TRANSFER_FRONT_BEAM_BREAK_SENSOR_ID);
+        beamBreakSensorBack = new DigitalInput(TRANSFER_BACK_BEAM_BREAK_SENSOR_ID);
     }
 
     public void setVoltage(double voltage) {
         transferMotor.setVoltage(voltage);
     }
 
-public void stopTransfer() {
+    public void stopTransfer() {
         transferMotor.setVoltage(0);
     }
-public int getBallCount(){
-    int count = 0;
-    if (!beamBreakSensor1.get()) {count++;}
-    if (!beamBreakSensor2.get()) {count++;}
-    return count;
-}
-@Override
-    public void periodic() {
-      SmartDashboard.putNumber("Ball Count", getBallCount());}
 
-  
+    public int getBallCount() {
+        int count = 0;
+        if (!beamBreakSensorFront.get()) {
+            count++;
+        }
+        if (!beamBreakSensorBack.get()) {
+            count++;
+        }
+        return count;
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Ball Count", getBallCount());
+    }
+
+    public static Transfer getInstance() {
+        if (transfer == null) {
+            transfer = new Transfer();
+        }
+        return transfer;
+    }
 }

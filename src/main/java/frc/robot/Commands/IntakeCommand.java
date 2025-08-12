@@ -34,12 +34,12 @@ public class IntakeCommand extends Command {
 
   @Override
   public void execute() {
-   
-    
+
     if (transfer.getBallCount() < 2) {
       arm.lower();
       rollers.setVoltage(6);
-      transfer.setVoltage(6);;
+      transfer.setVoltage(6);
+      ;
     } else {
       arm.raise();
       rollers.stopRollers();
@@ -49,10 +49,8 @@ public class IntakeCommand extends Command {
 
   }
 
-
-
   private void addRequirements(IntakeArm arm2, IntakeRollers rollers2, Shooter shooter2, Transfer transfer2) {
-    
+
     throw new UnsupportedOperationException("Unimplemented method 'addRequirements'");
   }
 

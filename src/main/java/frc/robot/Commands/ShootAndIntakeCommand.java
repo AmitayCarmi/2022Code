@@ -15,8 +15,8 @@ import frc.robot.Subsystems.Shooter;
 public class ShootAndIntakeCommand extends Command {
   private final Transfer transfer;
   private final Shooter shooter;
-private final IntakeArm arm;
-private final IntakeRollers rollers;
+  private final IntakeArm arm;
+  private final IntakeRollers rollers;
 
   public ShootAndIntakeCommand(Transfer transfer, Shooter shooter, IntakeArm arm, IntakeRollers rollers) {
     this.transfer = transfer;
@@ -24,34 +24,32 @@ private final IntakeRollers rollers;
     this.arm = arm;
     this.rollers = rollers;
     addRequirements(transfer, shooter, arm, rollers);
-      }
-    
-     
-    
-      // Called when the command is initially scheduled.
+  }
+
   @Override
   public void initialize() {
-      SmartDashboard.putString("Robot Mode", "Shooting and Intaking");
-      arm.lower();
-      shooter.setVoltage(11);
-      
-    }
+    SmartDashboard.putString("Robot Mode", "Shooting and Intaking");
+    arm.lower();
+    shooter.setVoltage(11);
 
-  // Called every time the scheduler runs while the command is scheduled.
+  }
+
   @Override
   public void execute() {
-   
-if (shooter.getAverageRPM() > 5000) {
-  transfer.setVoltage(6);
-} else {
-  transfer.stopTransfer();}
-  
-if ((transfer.getBallCount() < 2)){
-  rollers.setVoltage(6);
-} else {
-  rollers.stopRollers();}
+
+    if (shooter.getAverageRPM() > 5000) {
+      transfer.setVoltage(6);
+    } else {
+      transfer.stopTransfer();
+    }
+
+    if ((transfer.getBallCount() < 2)) {
+      rollers.setVoltage(6);
+    } else {
+      rollers.stopRollers();
+    }
   }
-  // Called once the command ends or is interrupted.
+
   @Override
   public void end(boolean interrupted) {
     shooter.stopShooter();
@@ -60,13 +58,13 @@ if ((transfer.getBallCount() < 2)){
     arm.raise();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
+
   private void addRequirements(Transfer transfer2, Shooter shooter2, IntakeArm arm2, IntakeRollers rollers2) {
-   
+
     throw new UnsupportedOperationException("Unimplemented method 'addRequirements'");
   }
 }

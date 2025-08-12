@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Subsystems.DriveTrain;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class DriveCommand extends Command {
   private final DriveTrain drive;
   private final PS5Controller Controller;
@@ -27,6 +26,4 @@ public class DriveCommand extends Command {
     drive.setTankDriveVoltage(left, right);
   }
 
-  
-  
 }
